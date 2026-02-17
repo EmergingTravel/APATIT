@@ -182,28 +182,24 @@ func (e *Exporter) processTaskStatResults(taskStatResults *client.TaskStatEntry)
 
 	for _, entry := range taskStatResults.TaskLogs {
 		entry.Traceroute = strings.ReplaceAll(entry.Traceroute, "\\n", "\n")
-		entry.MPName = translator.GetEngLocation(entry.MPName)
 	}
 }
 
 // processTaskStatGraphResultItem processes one record (monitoring point) and updates metrics.
 func (e *Exporter) processTaskStatGraphResultItem(item *client.MonitoringPointEntry, refreshStartTime time.Time) []prometheus.Labels {
 	if len(item.Result) == 0 {
-		locationName := item.Name
-		if e.Config.EngMPNames {
-			locationName = translator.GetEngLocation(item.Name)
-		}
 		MPDataStatus.WithLabelValues(
-			strconv.Itoa(e.taskInfo.ID), 
+			strconv.Itoa(e.taskInfo.ID),
 			e.taskInfo.ServiceName,
 			item.ID,
-			locationName,
-			).Set(0)
+			item.NameEn,
+			item.Name,
+		).Set(0)
 
 		e.log.WithFields(
 			logrus.Fields{
-				"mp_id": item.ID, 
-				"mp_name": item.Name}).Warn("No results found for MP")
+				"mp_id":   item.ID,
+				"mp_name": item.NameEn}).Warn("No results found for MP")
 		return nil
 	}
 
@@ -216,22 +212,18 @@ func (e *Exporter) processTaskStatGraphResultItem(item *client.MonitoringPointEn
 	}
 
 	MPDataStatus.WithLabelValues(
-		strconv.Itoa(e.taskInfo.ID), 
+		strconv.Itoa(e.taskInfo.ID),
 		e.taskInfo.ServiceName,
 		item.ID,
 		processedLabels[0][LabelMPName],
-		).Set(1)
+		processedLabels[0][LabelMPNameRu],
+	).Set(1)
 
 	return processedLabels
 }
 
 // buildLabels creates a set of Prometheus labels for a monitoring point.
 func (e *Exporter) buildLabels(item *client.MonitoringPointEntry) prometheus.Labels {
-	locationName := item.Name
-	if e.Config.EngMPNames {
-		locationName = translator.GetEngLocation(item.Name)
-	}
-
 	ipAddress := "unknown"
 	gpsCoordinates := "unknown"
 	for _, mp := range e.monitoringPoints {
@@ -246,7 +238,8 @@ func (e *Exporter) buildLabels(item *client.MonitoringPointEntry) prometheus.Lab
 		LabelTaskID:   strconv.Itoa(e.taskInfo.ID),
 		LabelTaskName: e.taskInfo.ServiceName,
 		LabelMPID:     item.ID,
-		LabelMPName:   locationName,
+		LabelMPName:   item.NameEn,
+		LabelMPNameRu: item.Name,
 		LabelMPIP:     ipAddress,
 		LabelMPGPS:    gpsCoordinates,
 	}
