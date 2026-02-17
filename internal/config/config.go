@@ -100,16 +100,6 @@ func envDuration(key string, def time.Duration) time.Duration {
 	return def
 }
 
-// envBool bool env variables helper.
-func envBool(key string, def bool) bool {
-	if v := os.Getenv(key); v != "" {
-		if b, err := strconv.ParseBool(v); err == nil {
-			return b
-		}
-	}
-	return def
-}
-
 // envInt int env variables helper.
 func envInt(env string, def int) int {
 	if v, ok := os.LookupEnv(env); ok {
