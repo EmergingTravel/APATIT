@@ -15,7 +15,6 @@ import (
 	"apatit/internal/log"
 	"apatit/internal/scheduler"
 	"apatit/internal/server"
-	"apatit/internal/translator"
 )
 
 // createExporters creates and returns a list of exporters for the specified tasks.
@@ -90,11 +89,6 @@ type application struct {
 func newApp(cfg *config.Config) (*application, error) {
 	// Set logger for components
 	log.Init(cfg.LogLevel)
-
-	// Set translator
-	if err := translator.Init(cfg.LocationsFilePath); err != nil {
-		logrus.Warnf("Failed to initialize translator, location names will not be translated: %v", err)
-	}
 
 	// Create API client
 	apiClient := client.New(cfg.APIKey, nil, cfg.RequestDelay, cfg.RequestRetries, cfg.MaxRequestsPerSecond)
