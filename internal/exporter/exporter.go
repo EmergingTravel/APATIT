@@ -11,7 +11,6 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"apatit/internal/client"
-	"apatit/internal/translator"
 )
 
 // Exporter collects metrics for a single task.
