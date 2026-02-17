@@ -42,7 +42,6 @@ func createExporters(apiClient *client.Client, cfg *config.Config) ([]*exporter.
 
 		expConfig := &exporter.Config{
 			TaskID:          taskID,
-			EngMPNames:      cfg.EngMPNames,
 			ApiUpdateDelay:  cfg.ApiUpdateDelay,
 			ApiDataTimeStep: cfg.ApiDataTimeStep,
 		}
