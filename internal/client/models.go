@@ -14,9 +14,10 @@ import (
 // It contains TM (tochka monitoringa) info with TmID; TmName and TmRes (results with time, speed).
 // P.S. TM  will be used as MP (Monitoring Point) after processing.
 type EntryRaw struct {
-	TmID   string      `json:"tm_id"`
-	TmName string      `json:"tm_name"`
-	TmRes  []*TmResRaw `json:"tm_res"`
+	TmID     string      `json:"tm_id"`
+	TmName   string      `json:"tm_name"`
+	TmNameEn string      `json:"tm_name_en"`
+	TmRes    []*TmResRaw `json:"tm_res"`
 }
 
 // TmResRaw
@@ -90,6 +91,8 @@ type MonitoringPointRaw struct {
 	ID string `json:"id"`
 	// Monitoring Point Name
 	Name string `json:"name"`
+	// Monitoring Point NameEn
+	NameEn string `json:"name_en"`
 	// Monitoring Point IP
 	IP string `json:"ip"`
 	// Monitoring Point GPS
@@ -116,6 +119,7 @@ type TasksLogsRaw struct {
 	Descr      *string `json:"descr"`
 	Status     *int    `json:"status"`
 	Tm         *string `json:"tm"`
+	TmEn       *string `json:"tm_en"`
 	TmID       *string `json:"tm_id"`
 	Traceroute *string `json:"traceroute"`
 }
@@ -140,6 +144,7 @@ type TaskInfo struct {
 type MonitoringPointInfo struct {
 	ID     string
 	Name   string
+	NameEn string
 	IP     string
 	GPS    string
 	Status int64
@@ -150,6 +155,7 @@ type MonitoringPointInfo struct {
 type MonitoringPointEntry struct {
 	ID     string
 	Name   string
+	NameEn string
 	Status int
 	Result []*MonitoringPointConnectionResult
 }
@@ -180,6 +186,7 @@ type TaskLog struct {
 	Data        string
 	Description string
 	Status      int64
+	MPNameRu    string
 	MPName      string
 	MPID        string
 	Traceroute  string
@@ -191,6 +198,7 @@ func (mp *MonitoringPointRaw) ProcessMonitoringPointInfo() *MonitoringPointInfo 
 	return &MonitoringPointInfo{
 		ID:     mp.ID,
 		Name:   mp.Name,
+		NameEn: mp.NameEn,
 		IP:     mp.IP,
 		GPS:    mp.GPS,
 		Status: parseInt(&mp.Status, "status"),
@@ -218,6 +226,7 @@ func (e *EntryRaw) ProcessMonitoringPointEntry() *MonitoringPointEntry {
 	entry := &MonitoringPointEntry{
 		ID:     e.TmID,
 		Name:   e.TmName,
+		NameEn: e.TmNameEn,
 		Result: make([]*MonitoringPointConnectionResult, 0, len(e.TmRes)),
 	}
 
@@ -247,7 +256,8 @@ func (t *TaskStatRaw) ProcessTaskEntry() *TaskStatEntry {
 			Data:        *resRaw.Data,
 			Description: *resRaw.Descr,
 			Status:      int64(*resRaw.Status),
-			MPName:      *resRaw.Tm,
+			MPName:      *resRaw.TmEn,
+			MPNameRu:    *resRaw.Tm,
 			MPID:        *resRaw.TmID,
 			Traceroute:  *resRaw.Traceroute,
 		}
