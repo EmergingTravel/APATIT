@@ -158,9 +158,9 @@ func (e *Exporter) RefreshMetrics() ([]prometheus.Labels, error) {
 		if item.Status > 1 || item.Status < 0 {
 			e.log.WithFields(
 				logrus.Fields{
-					"mp_id": item.ID, 
+					"mp_id":   item.ID,
 					"mp_name": item.Name,
-					"status": item.Status,
+					"status":  item.Status,
 				}).Errorf("incorrect monitoring points status: %d", item.Status)
 			item.Status = 0
 		}

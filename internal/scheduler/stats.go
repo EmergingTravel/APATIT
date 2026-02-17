@@ -14,7 +14,7 @@ import (
 	"apatit/internal/utils"
 )
 
-// runStatsScheduler starts a loop that periodically updates task stats and publish them
+// RunStatsScheduler starts a loop that periodically updates task stats and publish them
 func RunStatsScheduler(exporters []*exporter.Exporter, cfg *config.Config, stop <-chan struct{}) {
 	statsLog := logrus.WithField("component", "stats_scheduler")
 
