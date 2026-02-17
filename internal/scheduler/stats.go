@@ -74,12 +74,6 @@ func RunStatsScheduler(exporters []*exporter.Exporter, cfg *config.Config, stop 
 		wg.Wait()
 		statsLog.Infof("All exporters finished stats refresh cycle in %s.", time.Since(cycleStartTime))
 
-		//// transpose stats
-		//transposedStats := make([]*client.TransposedTaskStatEntry, 0, len(allStats))
-		//for _, originalStat := range allStats {
-		//	transposedStats = append(transposedStats, originalStat.Transpose())
-		//}
-
 		finalJSON, err := json.Marshal(allStats)
 		if err != nil {
 			statsLog.Errorf("Failed to marshal aggregated transposed stats to JSON: %v", err)
