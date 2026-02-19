@@ -145,7 +145,7 @@ The exporter exposes the following Prometheus metrics:
 
 ### Monitoring Point Metrics
 
-All MP metrics include labels: `task_id`, `task_name`, `mp_id`, `mp_name`, `mp_ip`, `mp_gps`
+All MP metrics include labels: `task_id`, `task_name`, `mp_id`, `mp_name`, `mp_name_ru`,`mp_ip`, `mp_gps`
 
 - `apatit_mp_status` - Status of monitoring point (1 = up, 0 = down/stale)
 - `apatit_mp_data_status` - Status of the data for the monitoring point (1 = has data, 0 = no data)
