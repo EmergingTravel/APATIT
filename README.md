@@ -25,7 +25,6 @@ style="text-align: justify">
 - 🔄 **Automatic Metrics Collection**: Periodically fetches metrics from Ping-Admin API for multiple tasks
 - 📊 **Prometheus Integration**: Exposes metrics in standard Prometheus format at `/metrics`
 - 📈 **JSON Stats API**: Provides additional JSON endpoints for task statistics
-- 🌍 **Location Translation**: Supports translation of location names via `locations.json`
 - 🚀 **Concurrent Processing**: Efficiently processes multiple tasks in parallel
 - 🔁 **Automatic Cleanup**: Removes stale metrics when monitoring points are no longer available
 - 🐳 **Docker Support**: Ready-to-use Docker image
@@ -79,7 +78,6 @@ The exporter can be configured via command-line flags or environment variables.
 | `--listen-address` | `LISTEN_ADDRESS` | HTTP server listen address | `:8080` |
 | `--log-level` | `LOG_LEVEL` | Log level (debug, info, warn, error) | `info` |
 | `--locations-file` | `LOCATIONS_FILE` | Path to locations.json file | `locations.json` |
-| `--eng-mp-names` | `ENG_MP_NAMES` | Translate MP names to English | `true` |
 | `--refresh-interval` | `REFRESH_INTERVAL` | Metrics refresh interval | `3m` |
 | `--api-update-delay` | `API_UPDATE_DELAY` | Ping-Admin API data update delay | `4m` |
 | `--api-data-time-step` | `API_DATA_TIME_STEP` | Time between API data points | `3m` |
@@ -175,13 +173,11 @@ apatit/
 │   ├── log/                     # Logging setup
 │   ├── scheduler/               # Metrics and stats schedulers
 │   ├── server/                  # HTTP server
-│   ├── translator/              # Location name translation
 │   ├── utils/                   # Utility functions
 │   └── version/                 # Version information
 ├── deploy/
 │   └── docker-compose.yaml      # Docker Compose configuration
 ├── Dockerfile                   # Container image definition
-├── locations.json               # Location translation mappings
 └── go.mod                       # Go module definition
 ```
 
