@@ -11,6 +11,7 @@ const (
 	LabelTaskName     = "task_name"
 	LabelMPID         = "mp_id"
 	LabelMPName       = "mp_name"
+	LabelMPNameRu     = "mp_name_ru"
 	LabelMPIP         = "mp_ip"
 	LabelMPGPS        = "mp_gps"
 )

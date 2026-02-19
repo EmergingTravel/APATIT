@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v1.1.0] - 2026-02-17
+
+### Added
+- Both English and Russian monitoring point names in metrics (as `mp_name` and `mp_name_ru` labels) and tasks JSON logs (as `MpName` and `MPNameRu` fields) 
+
+### Removed
+- All translation logic (`translator` module, `locations.json` file, and `ENG_MP_NAMES` ENV variable)
+
 ## [v1.0.0] - 2025-12-03
 
 ### Added

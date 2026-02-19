@@ -14,9 +14,10 @@ import (
 // It contains TM (tochka monitoringa) info with TmID; TmName and TmRes (results with time, speed).
 // P.S. TM  will be used as MP (Monitoring Point) after processing.
 type EntryRaw struct {
-	TmID   string      `json:"tm_id"`
-	TmName string      `json:"tm_name"`
-	TmRes  []*TmResRaw `json:"tm_res"`
+	TmID     string      `json:"tm_id"`
+	TmName   string      `json:"tm_name"`
+	TmNameEn string      `json:"tm_name_en"`
+	TmRes    []*TmResRaw `json:"tm_res"`
 }
 
 // TmResRaw
@@ -90,6 +91,8 @@ type MonitoringPointRaw struct {
 	ID string `json:"id"`
 	// Monitoring Point Name
 	Name string `json:"name"`
+	// Monitoring Point NameEn
+	NameEn string `json:"name_en"`
 	// Monitoring Point IP
 	IP string `json:"ip"`
 	// Monitoring Point GPS
@@ -116,6 +119,7 @@ type TasksLogsRaw struct {
 	Descr      *string `json:"descr"`
 	Status     *int    `json:"status"`
 	Tm         *string `json:"tm"`
+	TmEn       *string `json:"tm_en"`
 	TmID       *string `json:"tm_id"`
 	Traceroute *string `json:"traceroute"`
 }
@@ -140,6 +144,7 @@ type TaskInfo struct {
 type MonitoringPointInfo struct {
 	ID     string
 	Name   string
+	NameEn string
 	IP     string
 	GPS    string
 	Status int64
@@ -150,6 +155,7 @@ type MonitoringPointInfo struct {
 type MonitoringPointEntry struct {
 	ID     string
 	Name   string
+	NameEn string
 	Status int
 	Result []*MonitoringPointConnectionResult
 }
@@ -180,6 +186,7 @@ type TaskLog struct {
 	Data        string
 	Description string
 	Status      int64
+	MPNameRu    string
 	MPName      string
 	MPID        string
 	Traceroute  string
@@ -191,6 +198,7 @@ func (mp *MonitoringPointRaw) ProcessMonitoringPointInfo() *MonitoringPointInfo 
 	return &MonitoringPointInfo{
 		ID:     mp.ID,
 		Name:   mp.Name,
+		NameEn: mp.NameEn,
 		IP:     mp.IP,
 		GPS:    mp.GPS,
 		Status: parseInt(&mp.Status, "status"),
@@ -218,6 +226,7 @@ func (e *EntryRaw) ProcessMonitoringPointEntry() *MonitoringPointEntry {
 	entry := &MonitoringPointEntry{
 		ID:     e.TmID,
 		Name:   e.TmName,
+		NameEn: e.TmNameEn,
 		Result: make([]*MonitoringPointConnectionResult, 0, len(e.TmRes)),
 	}
 
@@ -247,7 +256,8 @@ func (t *TaskStatRaw) ProcessTaskEntry() *TaskStatEntry {
 			Data:        *resRaw.Data,
 			Description: *resRaw.Descr,
 			Status:      int64(*resRaw.Status),
-			MPName:      *resRaw.Tm,
+			MPName:      *resRaw.TmEn,
+			MPNameRu:    *resRaw.Tm,
 			MPID:        *resRaw.TmID,
 			Traceroute:  *resRaw.Traceroute,
 		}
@@ -283,79 +293,3 @@ func parseInt(s *string, fieldName string) int64 {
 	}
 	return i
 }
-
-//// Transpose
-//// TransposedTaskLogs
-//// is just a transposed TaskLog structure.
-//type TransposedTaskLogs struct {
-//	Data        []string `json:"Data"`
-//	Description []string `json:"Description"`
-//	Status      []int64  `json:"Status"`
-//	MPName      []string `json:"MPName"`
-//	MPID        []string `json:"MPID"`
-//	Traceroute  []string `json:"Traceroute"`
-//}
-//
-//// TransposedTaskStatEntry
-//// is a transposed 'TaskStatEntry'.
-//type TransposedTaskStatEntry struct {
-//	TaskID   string             `json:"TaskID"`
-//	TaskName string             `json:"TaskName"`
-//	TaskLogs TransposedTaskLogs `json:"TaskLogs"`
-//}
-//
-//// transposes TaskLogs.
-//func (entry *TaskStatEntry) Transpose() *TransposedTaskStatEntry {
-//	logCount := len(entry.TaskLogs)
-//
-//	data := make([]string, 0, logCount)
-//	description := make([]string, 0, logCount)
-//	status := make([]int64, 0, logCount)
-//	mpName := make([]string, 0, logCount)
-//	mpID := make([]string, 0, logCount)
-//	traceroute := make([]string, 0, logCount)
-//
-//	for _, log := range entry.TaskLogs {
-//		data = append(data, log.Data)
-//		description = append(description, log.Description)
-//		status = append(status, log.Status)
-//		mpName = append(mpName, log.MPName)
-//		mpID = append(mpID, log.MPID)
-//		traceroute = append(traceroute, log.Traceroute)
-//	}
-//
-//	transposedEntry := &TransposedTaskStatEntry{
-//		TaskID:   entry.TaskID,
-//		TaskName: entry.TaskName,
-//		TaskLogs: TransposedTaskLogs{
-//			Data:        data,
-//			Description: description,
-//			Status:      status,
-//			MPName:      mpName,
-//			MPID:        mpID,
-//			Traceroute:  traceroute,
-//		},
-//	}
-//
-//	return transposedEntry
-//}
-//
-//// --- Formatting Helpers ---
-//
-//// FormatMonitoringPointSliceToMap gets MonitoringPoint slice and returns map[ID]MonitoringPoint
-//func FormatMonitoringPointSliceToMap(items []*MonitoringPointRaw) map[string]*MonitoringPointRaw {
-//	result := make(map[string]*MonitoringPointRaw, len(items))
-//	for _, value := range items {
-//		result[value.ID] = value
-//	}
-//	return result
-//}
-//
-//// FormatTaskSliceToMap gets TaskRaw slice and returns map[TaskID]Task
-//func FormatTaskSliceToMap(items []*TaskRaw) map[string]*TaskRaw {
-//	result := make(map[string]*TaskRaw, len(items))
-//	for _, value := range items {
-//		result[strconv.Itoa(value.ID)] = value
-//	}
-//	return result
-//}

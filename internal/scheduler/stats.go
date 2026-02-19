@@ -14,7 +14,7 @@ import (
 	"apatit/internal/utils"
 )
 
-// runStatsScheduler starts a loop that periodically updates task stats and publish them
+// RunStatsScheduler starts a loop that periodically updates task stats and publish them
 func RunStatsScheduler(exporters []*exporter.Exporter, cfg *config.Config, stop <-chan struct{}) {
 	statsLog := logrus.WithField("component", "stats_scheduler")
 
@@ -73,12 +73,6 @@ func RunStatsScheduler(exporters []*exporter.Exporter, cfg *config.Config, stop 
 
 		wg.Wait()
 		statsLog.Infof("All exporters finished stats refresh cycle in %s.", time.Since(cycleStartTime))
-
-		//// transpose stats
-		//transposedStats := make([]*client.TransposedTaskStatEntry, 0, len(allStats))
-		//for _, originalStat := range allStats {
-		//	transposedStats = append(transposedStats, originalStat.Transpose())
-		//}
 
 		finalJSON, err := json.Marshal(allStats)
 		if err != nil {

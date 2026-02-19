@@ -19,6 +19,7 @@ var (
 		LabelTaskName,
 		LabelMPID,
 		LabelMPName,
+		LabelMPNameRu,
 		LabelMPIP,
 		LabelMPGPS,
 	}
@@ -109,7 +110,7 @@ var (
 			Name:      "data_status",
 			Help:      "Status of the data for the monitoring point (1 = has data, 0 = no data).",
 		},
-		[]string{LabelTaskID, LabelTaskName, LabelMPID, LabelMPName},
+		[]string{LabelTaskID, LabelTaskName, LabelMPID, LabelMPName, LabelMPNameRu},
 	)
 
 	MPConnectSeconds = prometheus.NewGaugeVec(

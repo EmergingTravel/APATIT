@@ -13,7 +13,6 @@ import (
 type Config struct {
 	APIKey                   string
 	TaskIDs                  []int
-	EngMPNames               bool
 	ApiUpdateDelay           time.Duration
 	ApiDataTimeStep          time.Duration
 	RefreshInterval          time.Duration
@@ -32,7 +31,6 @@ func New() (*Config, error) {
 
 	flag.StringVar(&cfg.APIKey, "api-key", envString("API_KEY", ""), "API key for Ping-Admin")
 	taskIDsStr := flag.String("task-ids", envString("TASK_IDS", ""), "Comma-separated list of task IDs")
-	flag.BoolVar(&cfg.EngMPNames, "eng-mp-names", envBool("ENG_MP_NAMES", true), "Translate monitoring points (MP) names to English")
 	flag.DurationVar(&cfg.ApiUpdateDelay, "api-update-delay", envDuration("API_UPDATE_DELAY", 4*time.Minute), "Fixed Ping-Admin API delay for new data update")
 	flag.DurationVar(&cfg.ApiDataTimeStep, "api-data-time-step", envDuration("API_DATA_TIME_STEP", 3*time.Minute), "Fixed Ping-Admin API time between data points")
 	flag.DurationVar(&cfg.RefreshInterval, "refresh-interval", envDuration("REFRESH_INTERVAL", 3*time.Minute), "Exporter's refresh interval")
@@ -97,16 +95,6 @@ func envDuration(key string, def time.Duration) time.Duration {
 	if v := os.Getenv(key); v != "" {
 		if d, err := time.ParseDuration(v); err == nil {
 			return d
-		}
-	}
-	return def
-}
-
-// envBool bool env variables helper.
-func envBool(key string, def bool) bool {
-	if v := os.Getenv(key); v != "" {
-		if b, err := strconv.ParseBool(v); err == nil {
-			return b
 		}
 	}
 	return def
