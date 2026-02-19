@@ -2170,7 +2170,7 @@
               "showLegend": false
             },
             "mergeValues": true,
-            "perPage": 20,
+            "perPage": 10,
             "rowHeight": 0.9,
             "showValue": "never",
             "tooltip": {
