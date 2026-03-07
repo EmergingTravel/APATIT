@@ -84,7 +84,6 @@ jobs:
         with:
           files: |
             apatit-linux-amd64
-            locations.json
           generate_release_notes: true
           draft: false
           prerelease: ${{ contains(github.ref, '-') }}
