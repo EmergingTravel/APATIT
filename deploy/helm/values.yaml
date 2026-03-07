@@ -122,7 +122,6 @@ env: {}
   # TASK_IDS: "<task_ids>" # Task IDs from table ID Column https://ping-admin.com/tasks/
   # LISTEN_ADDRESS: ":8080"
   # LOG_LEVEL: "info"
-  # LOCATIONS_FILE: "locations.json"
   # ENG_MP_NAMES: "true"
   # REFRESH_INTERVAL: 3m
   # API_UPDATE_DELAY: 4m
@@ -137,7 +136,6 @@ args: []
   # - "--task-ids=<task_ids>" # Task IDs from table ID Column https://ping-admin.com/tasks/"
   # - "--listen-address=:8080"
   # - "--log-level=info"
-  # - "--locations-file=locations.json"
   # - "--eng-mp-names=true"
   # - "--refresh-interval=3m"
   # - "--api-update-delay=4m"

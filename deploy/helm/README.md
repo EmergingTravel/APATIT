@@ -164,7 +164,6 @@ args:
 | `TASK_IDS` | `--task-ids` | Task IDs to monitor |
 | `LISTEN_ADDRESS` | `--listen-address` | Address to listen on | `:8080` |
 | `LOG_LEVEL` | `--log-level` | Logging level | `info` |
-| `LOCATIONS_FILE` | `--locations-file` | Locations file path | `locations.json` |
 | `ENG_MP_NAMES` | `--eng-mp-names` | Use English MP names | `true` |
 | `REFRESH_INTERVAL` | `--refresh-interval` | Refresh interval | `3m` |
 | `API_UPDATE_DELAY` | `--api-update-delay` | API update delay | `4m` |
