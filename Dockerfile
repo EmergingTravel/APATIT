@@ -17,7 +17,6 @@ LABEL org.opencontainers.image.source="https://github.com/ostrovok-tech/apatit"
 LABEL org.opencontainers.image.version="${VERSION}"
 
 COPY --from=build /app/apatit /usr/local/bin/apatit
-COPY locations.json /app/locations.json
 WORKDIR /app
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
