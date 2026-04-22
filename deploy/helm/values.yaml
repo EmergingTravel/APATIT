@@ -1,3 +1,4 @@
+---
 # Default values for APATIT.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -13,14 +14,15 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-# This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+# This is for the secretes for pulling an image from a private repository
+# More information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
 # This is to override the chart name.
 nameOverride: ""
 fullnameOverride: ""
 
 # This is for setting Kubernetes Annotations to a Pod.
-# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/ 
+# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
 podAnnotations: {}
   # prometheus.io/scrape: "true"
   # prometheus.io/port: "8080"
@@ -56,6 +58,9 @@ service:
 ingress:
   enabled: false
   className: ""
+  labels: {}
+    # my-custom-label: my-value
+    # environment: prod
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
@@ -81,7 +86,8 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-# This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+# This is to setup the liveness and readiness probes
+# More information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 livenessProbe:
   httpGet:
     path: /metrics
@@ -112,9 +118,9 @@ affinity: {}
 
 # Set variables as secret
 envSecrets:
-  - name: # API_KEY
-    secretName: # ping-admin-secret
-    secretKey: # readonly-api-key
+  - name:  # API_KEY
+    secretName:  # ping-admin-secret
+    secretKey:  # readonly-api-key
 
 # App configuration
 env: {}
@@ -122,6 +128,7 @@ env: {}
   # TASK_IDS: "<task_ids>" # Task IDs from table ID Column https://ping-admin.com/tasks/
   # LISTEN_ADDRESS: ":8080"
   # LOG_LEVEL: "info"
+  # LOCATIONS_FILE: "locations.json"
   # ENG_MP_NAMES: "true"
   # REFRESH_INTERVAL: 3m
   # API_UPDATE_DELAY: 4m
@@ -136,6 +143,7 @@ args: []
   # - "--task-ids=<task_ids>" # Task IDs from table ID Column https://ping-admin.com/tasks/"
   # - "--listen-address=:8080"
   # - "--log-level=info"
+  # - "--locations-file=locations.json"
   # - "--eng-mp-names=true"
   # - "--refresh-interval=3m"
   # - "--api-update-delay=4m"
