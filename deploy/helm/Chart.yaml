@@ -1,3 +1,4 @@
+---
 apiVersion: v2
 name: apatit
 description: Set of exporters for https://ping-admin.com/
