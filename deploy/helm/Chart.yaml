@@ -7,11 +7,11 @@ keywords:
   - prometheus
   - ping-admin
 sources:
-  - https://github.com/ostrovok-tech/apatit
+  - https://github.com/emergingtravel/apatit
   - https://ping-admin.com/
 maintainers:
-  - name: Ostrovok! Tech
-    url: https://github.com/ostrovok-tech
+  - name: Emerging Travel Inc.
+    url: https://github.com/emergingtravel
 type: application
 version: 1.0.0
 appVersion: "1.0.0"

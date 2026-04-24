@@ -10,7 +10,7 @@ APATIT is a Prometheus exporter that collects metrics from ping-admin.com monito
 
 - Kubernetes 1.19+
 - Helm 3.0+
-- Access to the container image: `ghcr.io/ostrovok-tech/apatit`
+- Access to the container image: `ghcr.io/emergingtravel/apatit`
 
 ## Installation
 
@@ -42,7 +42,7 @@ The following table lists the configurable parameters and their default values.
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `replicaCount` | Number of replicas | `1` |
-| `image.repository` | Container image repository | `ghcr.io/ostrovok-tech/apatit` |
+| `image.repository` | Container image repository | `ghcr.io/emergingtravel/apatit` |
 | `image.tag` | Container image tag (defaults to chart appVersion) | `""` |
 | `image.pullPolicy` | Image pull policy | `IfNotPresent` |
 | `imagePullSecrets` | Secrets for pulling images from private registries | `[]` |
@@ -321,13 +321,13 @@ This chart is configured with security best practices:
 
 ## Links
 
-- [Source Code](https://github.com/ostrovok-tech/apatit)
+- [Source Code](https://github.com/emergingtravel/apatit)
 - [ping-admin.com](https://ping-admin.com/)
 - [Helm Documentation](https://helm.sh/docs/)
 
 ## Maintainers
 
-- **Ostrovok! Tech** - [GitHub](https://github.com/ostrovok-tech)
+- **Emerging Travel Inc.** - [GitHub](https://github.com/emergingtravel)
 
 ## License
 
