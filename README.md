@@ -39,14 +39,14 @@ docker run --rm -d \
   -p 8080:8080 \
   -e API_KEY=your-api-key \
   -e TASK_IDS=1,2,3 \
-  ghcr.io/ostrovok-tech/apatit:latest
+  ghcr.io/emergingtravel/apatit:latest
 ```
 
 ### From Source
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/ostrovok-tech/apatit.git
+git clone https://github.com/emergingtravel/apatit.git
 cd apatit
 ```
 
@@ -183,6 +183,6 @@ apatit/
 
 ## Support
 
-For issues and feature requests, please use the [GitHub Issues](https://github.com/ostrovok-tech/apatit/issues) page.
+For issues and feature requests, please use the [GitHub Issues](https://github.com/emergingtravel/apatit/issues) page.
 
 </div>

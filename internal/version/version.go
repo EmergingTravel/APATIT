@@ -5,8 +5,8 @@ package version
 // Example: go build -ldflags "-X 'apatit/internal/version.Version=1.1.0'"
 var (
 	Name    = "apatit"
-	Version = "v1.0.0"
-	Owner   = "ostrovok.tech"
+	Version = "v1.1.3"
+	Owner   = "emerging.travel"
 )
 
 const (
