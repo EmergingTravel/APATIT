@@ -253,6 +253,7 @@ func (t *TaskStatRaw) ProcessTaskEntry() *TaskStatEntry {
 
 	for _, resRaw := range t.TasksLogs {
 		if resRaw.TmEn != nil { // resRaw.TmEn could be null
+
 			TaskStatRes := &TaskLog{
 				Data:        *resRaw.Data,
 				Description: *resRaw.Descr,
@@ -260,8 +261,14 @@ func (t *TaskStatRaw) ProcessTaskEntry() *TaskStatEntry {
 				MPName:      *resRaw.TmEn,
 				MPNameRu:    *resRaw.Tm,
 				MPID:        *resRaw.TmID,
-				Traceroute:  *resRaw.Traceroute,
 			}
+
+			if resRaw.Traceroute != nil {
+				TaskStatRes.Traceroute = *resRaw.Traceroute
+			} else {
+				TaskStatRes.Traceroute = ""
+			}
+
 			entry.TaskLogs = append(entry.TaskLogs, TaskStatRes)
 		}
 	}
