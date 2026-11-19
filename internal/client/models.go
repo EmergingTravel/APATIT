@@ -98,7 +98,7 @@ type MonitoringPointRaw struct {
 	// Monitoring Point GPS
 	GPS string `json:"gps"`
 	// Monitoring point availability status
-	Status string `json:"status"`
+	Status int `json:"status"`
 }
 
 // TaskStatRaw
@@ -201,7 +201,7 @@ func (mp *MonitoringPointRaw) ProcessMonitoringPointInfo() *MonitoringPointInfo 
 		NameEn: mp.NameEn,
 		IP:     mp.IP,
 		GPS:    mp.GPS,
-		Status: parseInt(&mp.Status, "status"),
+		Status: int64(mp.Status),
 	}
 }
 
